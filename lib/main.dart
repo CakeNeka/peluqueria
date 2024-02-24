@@ -14,18 +14,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Peluquería',
-      initialRoute: 'login',
+      initialRoute:
+          'home', // Tiene que ser login. Para pruebas cambiar por home
       routes: {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterScreen(),
         'home': (_) => HomeScreen(),
-        'gestion_horario': (_) => GestionHorarioScreen(),
+        'gestion_horario': (_) =>
+            GestionHorarioScreen(), // Calendario y Horario de Apertura
         'gestion_peluqueros': (_) => GestionPeluquerosScreen(),
-        'gestion_horarios': (_) => GestionHorarioScreen(),
         'reservas': (_) => ReservasScreen(),
+        'consulta_horarios': (_) => ConsultaHorariosScreen(),
       },
       theme: AppTheme.lightMode,
-      darkTheme: AppTheme.lightMode,
+      darkTheme: AppTheme.lightMode, // TODO: Implementar tema oscuro
     );
   }
 }
