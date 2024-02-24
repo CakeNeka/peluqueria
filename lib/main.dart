@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/screens/screens.dart';
+import 'package:peluqueria/services/auth_services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const AppState());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'login',
       routes: {
         'login': (_) => LoginScreen(),
+        'register': (_) => RegisterScreen(),
         'home': (_) => HomeScreen(),
         'gestion_horario': (_) => GestionHorarioScreen(),
         'gestion_peluqueros': (_) => GestionPeluquerosScreen(),
@@ -34,7 +36,8 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [],
+      providers: [ChangeNotifierProvider(create: (_) => AuthService())],
+      child: MyApp(),
     );
   }
 }

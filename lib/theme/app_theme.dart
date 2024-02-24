@@ -23,6 +23,9 @@ class AppTheme {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey.shade400),
         ),
+        fillColor: Colors.grey.shade200,
+        filled: true,
+        hintStyle: TextStyle(color: Colors.grey[500]),
       )
 
       /*
