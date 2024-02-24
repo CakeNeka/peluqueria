@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:peluqueria/components/password_text_field.dart';
 import 'package:peluqueria/components/simple_button.dart';
 import 'package:peluqueria/providers/login_form_provider.dart';
@@ -8,8 +10,29 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  void testBiometrics() async {
+    LocalAuthentication auth = LocalAuthentication();
+    bool deviceSupported = await auth.isDeviceSupported();
+    print("Device supported: $deviceSupported");
+    List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
+    print(availableBiometrics);
+    try {
+      bool authenticated = await auth.authenticate(
+          localizedReason:
+              '¡Holis! Puedes usar tu huella para acceder a la aplicación',
+          options: const AuthenticationOptions(
+            stickyAuth: true, // No falla si la aplicación pasa a segundo plano
+            biometricOnly: true, // Impide uso de PIN
+          ));
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    testBiometrics();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
