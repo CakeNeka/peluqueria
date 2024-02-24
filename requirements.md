@@ -45,6 +45,8 @@
 
 ### Gestión de peluqueros
 
+- Accesible para usuarios con rol **gerente**
+
 #### Lista de peluqueros
 
 Lista todos los usuarios registrados con **rol de peluquero**.
@@ -66,6 +68,8 @@ Filtrar por **nombres**, **apellidos** y/o **teléfono**
 > [Easy Search Bar](https://pub.dev/packages/easy_search_bar) o [SearchBar](https://api.flutter.dev/flutter/material/SearchBar-class.html)
 
 ## Miembro 4
+
+- Accesible solo para **peluqueros**
 
 ### Lectura de reservas
 
@@ -98,13 +102,17 @@ Solo hay que **leer** de la base de datos, las citas **ya están insertadas** y 
 
 ### Comprobación de horarios disponibles
 
+- Accesible para **peluqueros** y **gerentes**
+
 - [**Calendario**](https://pub.dev/packages/table_calendar/example)
-    1. Seleccionar un día
-    2. Seleccionar un peluquero
+    1. Seleccionar un peluquero (Si el usuario conectado tiene rol **peluquero** se selecciona a el mismo automáticamente)
+    2. Seleccionar un día
 - Mostrar botones con horas disponibles en rangos de 30 minutos
 - No es necesario implementar la reserva de citas, solo **mostrar las horas disponibles**
 
-Es importante mostrar solo los rangos horarios en los que el peluquero trabaja
+  - Horario en el que la **peluquería abre**
+  - Botones bloqueados en negro si el **peluquero no trabaja**
+  - Botones bloqueados en otro color si **ya hay una cita en esa hora**
 
 ### Base de datos Firebase
 
