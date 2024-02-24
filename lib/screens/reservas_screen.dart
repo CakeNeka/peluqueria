@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/components/components.dart';
 
 class ReservasScreen extends StatelessWidget {
   const ReservasScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('ReservasScreen'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Consulta de Reservas"),
       ),
+      endDrawer: DefaultDrawer(selectedIndex: 3),
     );
   }
 }

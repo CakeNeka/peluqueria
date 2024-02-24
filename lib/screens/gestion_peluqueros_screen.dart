@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/components/components.dart';
 import 'package:peluqueria/widgets/user_card.dart';
 
 class GestionPeluquerosScreen extends StatelessWidget {
@@ -41,6 +42,7 @@ class GestionPeluquerosScreen extends StatelessWidget {
           }
         },
       ),
+      endDrawer: DefaultDrawer(selectedIndex: 2),
     );
   }
 }
