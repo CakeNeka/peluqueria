@@ -6,8 +6,33 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('LoginScreen'),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 40),
+              // Logo
+              Icon(
+                Icons.cut_outlined,
+                size: 100,
+              ),
+              SizedBox(height: 40),
+              Text(
+                "Te damos la bienvenida de nuevo :D",
+                style: TextStyle(fontSize: 16),
+              ),
+
+              SizedBox(height: 40),
+
+              TextField(
+                decoration: InputDecoration(),
+              ),
+              // username
+
+              // password
+            ],
+          ),
+        ),
       ),
     );
   }

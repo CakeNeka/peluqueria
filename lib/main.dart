@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         'reservas': (_) => ReservasScreen(),
       },
       theme: AppTheme.lightMode,
+      darkTheme: AppTheme.lightMode,
     );
   }
 }
