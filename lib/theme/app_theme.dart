@@ -16,8 +16,10 @@ class AppTheme {
           bodyColor: Colors.grey[800],
           displayColor: Colors.black,
         ),
+    /*
     scaffoldBackgroundColor: lightMode.colorScheme.background,
     appBarTheme:
         AppBarTheme(elevation: 0, color: lightMode.colorScheme.secondary),
+        */
   );
 }
