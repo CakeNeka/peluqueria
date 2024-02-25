@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peluqueria/components/components.dart';
+import 'package:peluqueria/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

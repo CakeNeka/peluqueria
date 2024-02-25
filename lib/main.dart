@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/screens/screens.dart';
 import 'package:peluqueria/services/auth_services.dart';
+import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Peluquería',
       initialRoute:
-          'home', // Tiene que ser login. Para pruebas cambiar por home
+          'login', // Tiene que ser login. Para pruebas cambiar por home
       routes: {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterScreen(),
@@ -38,7 +39,10 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthService())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => UsuariosServices()),
+      ],
       child: MyApp(),
     );
   }

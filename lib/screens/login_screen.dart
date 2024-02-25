@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:peluqueria/components/password_text_field.dart';
-import 'package:peluqueria/components/simple_button.dart';
+import 'package:peluqueria/widgets/password_text_field.dart';
+import 'package:peluqueria/widgets/simple_button.dart';
 import 'package:peluqueria/providers/login_form_provider.dart';
 import 'package:peluqueria/services/auth_services.dart';
 import 'package:provider/provider.dart';
@@ -49,9 +49,6 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginForm extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
   void login(LoginFormProvider loginForm, context) async {
     if (loginForm.isLoading) return;
     FocusScope.of(context).unfocus();
@@ -69,10 +66,13 @@ class _LoginForm extends StatelessWidget {
       // Mostrar error en la terminal
       print(errorMessage);
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(title: Text('Credenciales Incorrectas'));
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Credenciales Incorrectas, $errorMessage'),
+          );
+        },
+      );
       loginForm.isLoading = false;
     }
   }
@@ -130,7 +130,14 @@ class _LoginForm extends StatelessWidget {
           const SizedBox(height: 10),
 
           // password
-          PasswordTextField(loginForm: loginForm),
+          PasswordTextField(
+            onChanged: (value) => loginForm.password = value,
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : "La contraseña debe tener al menos 6 caracteres";
+            },
+          ),
 
           const SizedBox(height: 30),
           // Sign in
