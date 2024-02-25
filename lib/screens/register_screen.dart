@@ -58,8 +58,6 @@ class _RegisterForm extends StatelessWidget {
       registerForm.isLoading = false;
     }
   }
-  // 9Wg3Vt5DVEYhk6f1gTyBamjQ6Z42
-  // adgnJIGQ58a35Zfd0ZC3rYSo71A3
 
   Usuario generateUsuario(RegisterFormProvider registerForm) {
     return Usuario(

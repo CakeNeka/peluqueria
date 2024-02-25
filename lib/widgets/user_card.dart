@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/screens/screens.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({super.key});
+  final String nombre;
+  final String rol;
+
+  UserCard({Key? key, required this.nombre, required this.rol})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +31,16 @@ class UserCard extends StatelessWidget {
           children: <Widget>[
             const Icon(Icons.account_circle, size: 80),
             const SizedBox(width: 10),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Cliente 1',
+                  nombre,
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 Text(
-                  'Rol: cliente',
+                  rol,
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
               ],
@@ -44,7 +49,12 @@ class UserCard extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(right: 8.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UsuarioScreen(nombre: nombre, rol: rol))
+                  );
+                },
                 child: const Text('Ver',
                     style: TextStyle(color: Colors.black, fontSize: 18)),
               ),

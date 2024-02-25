@@ -5,3 +5,4 @@ export 'package:peluqueria/screens/home_screen.dart';
 export 'package:peluqueria/screens/login_screen.dart';
 export 'package:peluqueria/screens/reservas_screen.dart';
 export 'package:peluqueria/screens/register_screen.dart';
+export 'package:peluqueria/screens/usuario_screen.dart';
