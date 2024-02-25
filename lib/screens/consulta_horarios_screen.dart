@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peluqueria/components/components.dart';
+import 'package:peluqueria/widgets/widgets.dart';
 
 class ConsultaHorariosScreen extends StatelessWidget {
   const ConsultaHorariosScreen({Key? key}) : super(key: key);

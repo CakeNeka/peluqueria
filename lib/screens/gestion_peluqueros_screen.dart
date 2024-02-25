@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peluqueria/components/components.dart';
-import 'package:peluqueria/widgets/user_card.dart';
+import 'package:peluqueria/widgets/widgets.dart';
 
 class GestionPeluquerosScreen extends StatelessWidget {
   const GestionPeluquerosScreen({super.key});
@@ -14,7 +13,7 @@ class GestionPeluquerosScreen extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       body: ListView.builder(
-        itemCount: 10, 
+        itemCount: 10,
         itemBuilder: (context, index) {
           if (index == 0) {
             return const Padding(
@@ -24,21 +23,21 @@ class GestionPeluquerosScreen extends StatelessWidget {
                   labelText: 'Buscar',
                   labelStyle: TextStyle(color: Colors.black87),
                   prefixIcon: Icon(Icons.search),
-                  fillColor: Colors.white54, 
-                  filled: true, 
+                  fillColor: Colors.white54,
+                  filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    borderSide: BorderSide(color: Colors.black87), 
+                    borderSide: BorderSide(color: Colors.black87),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    borderSide: BorderSide(color: Colors.black87), 
+                    borderSide: BorderSide(color: Colors.black87),
                   ),
                 ),
               ),
             );
           } else {
-            return UserCard(); 
+            return UserCard();
           }
         },
       ),

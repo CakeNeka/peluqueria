@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peluqueria/components/components.dart';
+import 'package:peluqueria/widgets/widgets.dart';
 
 class ReservasScreen extends StatelessWidget {
   const ReservasScreen({Key? key}) : super(key: key);
