@@ -68,7 +68,7 @@ class _GestionPeluquerosScreenState extends State<GestionPeluquerosScreen> {
               ),
             );
           } else {
-            return UserCard(nombre: filteredUserList[index - 1].nombre, rol: filteredUserList[index - 1].rol); 
+            return UserCard(nombre: filteredUserList[index - 1].nombre, rol: filteredUserList[index - 1].rol, id: filteredUserList[index - 1].id); 
           }
         },
       ),

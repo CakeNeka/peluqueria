@@ -30,4 +30,25 @@ class UsuariosServices extends ChangeNotifier {
 
     return usuario;
   }
+
+    Future<String> updateUsuario(Usuario usuario) async {
+    final url = Uri.https( _baseUrl, 'usuarios/${ usuario.id }.json' );
+    final resp = await http.put( url, body: usuario.toJson() );
+    final decodedData = resp.body;
+
+    print( decodedData);
+
+    return usuario.id!;
+  }
+
+  Future<String> updateUsuarioRol(String id, String nuevoRol) async {
+  final url = Uri.https(_baseUrl, 'usuarios/$id.json');
+  final resp = await http.patch(url, body: jsonEncode({'rol': nuevoRol}));
+  final decodedData = resp.body;
+
+  print(decodedData);
+
+  return id;
+}
+
 }
