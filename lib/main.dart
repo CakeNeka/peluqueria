@@ -4,6 +4,7 @@ import 'package:peluqueria/services/auth_services.dart';
 import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:peluqueria/services/usuarios_services.dart';
 
 void main() => runApp(const AppState());
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UsuariosServices misUsuariosServices = UsuariosServices();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Peluquería',
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
         'home': (_) => HomeScreen(),
         'gestion_horario': (_) =>
             GestionHorarioScreen(), // Calendario y Horario de Apertura
-        'gestion_peluqueros': (_) => GestionPeluquerosScreen(),
+        'gestion_peluqueros': (_) =>
+            GestionPeluquerosScreen(usuariosServices: misUsuariosServices),
         'reservas': (_) => ReservasScreen(),
         'consulta_horarios': (_) => ConsultaHorariosScreen(),
       },

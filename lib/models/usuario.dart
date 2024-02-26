@@ -5,7 +5,7 @@ class Usuario {
   String genero;
   String id;
   String nombre;
-  String rol = "usuario";
+  String rol;
   String telefono;
   bool verificado = false;
 
