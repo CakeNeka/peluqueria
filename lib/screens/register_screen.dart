@@ -62,7 +62,6 @@ class _RegisterForm extends StatelessWidget {
     return Usuario(
       email: registerForm.email,
       genero: registerForm.genero,
-      id: registerForm.id,
       nombre: registerForm.nombre,
       rol: registerForm.rol,
       telefono: registerForm.telefono,
