@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/providers/connected_user_provider.dart';
+import 'package:provider/provider.dart';
 
 class DefaultDrawer extends StatelessWidget {
   final int selectedIndex;
@@ -10,6 +12,10 @@ class DefaultDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider =
+        Provider.of<ConnectedUserProvider>(context, listen: false);
+    String rol = userProvider.getActiveUserRol().toLowerCase();
+    print(userProvider.activeUser.toJson());
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -27,20 +33,22 @@ class DefaultDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'home');
             },
           ),
-          ListTile(
-            title: const Text('Gestión de Horario'),
-            selected: selectedIndex == 1, // boolean
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'gestion_horario');
-            },
-          ),
-          ListTile(
-            title: const Text('Gestión de Peluqueros'),
-            selected: selectedIndex == 2, // boolean
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'gestion_peluqueros');
-            },
-          ),
+          if (rol == "gerente")
+            ListTile(
+              title: const Text('Gestión de Horario'),
+              selected: selectedIndex == 1, // boolean
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'gestion_horario');
+              },
+            ),
+          if (rol == "gerente")
+            ListTile(
+              title: const Text('Gestión de Peluqueros'),
+              selected: selectedIndex == 2, // boolean
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'gestion_peluqueros');
+              },
+            ),
           ListTile(
             title: const Text('Reservas'),
             selected: selectedIndex == 3, // boolean

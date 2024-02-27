@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:peluqueria/models/usuario.dart';
+import 'package:peluqueria/providers/connected_user_provider.dart';
+import 'package:peluqueria/services/usuarios_services.dart';
 import 'package:peluqueria/widgets/password_text_field.dart';
 import 'package:peluqueria/widgets/simple_button.dart';
 import 'package:peluqueria/providers/login_form_provider.dart';
@@ -36,20 +39,32 @@ class _LoginForm extends StatelessWidget {
 
     loginForm.isLoading = true;
 
-    // TODO: validar si el login es correcto
     await tryLogin(loginForm, context);
   }
 
   Future<void> tryLogin(LoginFormProvider loginForm, context) async {
     final authService = Provider.of<AuthService>(context, listen: false);
-    // TODO: validar si el login es correcto
+    final usuariosService =
+        Provider.of<UsuariosServices>(context, listen: false);
+    final conectadoProvider =
+        Provider.of<ConnectedUserProvider>(context, listen: false);
+
     final String? errorMessage =
         await authService.login(loginForm.email, loginForm.password);
+
     if (errorMessage == null) {
       // Almacenar usuario y contraseña localmente (puede que no sea muy seguro)
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('user', loginForm.email);
       prefs.setString('password', loginForm.password);
+
+      // Registrar usuario como usuario recién conectado (selecciona por email)
+      Usuario? activeUser =
+          await usuariosService.getUsuarioByEmail(loginForm.email);
+      print(activeUser?.toJson());
+      // Si el login es correcto, activeUser no va a ser nulo
+      conectadoProvider.activeUser = activeUser!;
+
       Navigator.pushReplacementNamed(context, 'home');
     } else {
       // Mostrar error en la terminal
