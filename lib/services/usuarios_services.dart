@@ -22,33 +22,29 @@ class UsuariosServices extends ChangeNotifier {
 
     final Map<String, dynamic> usuariosMap = json.decode(resp.body);
 
-      usuariosMap.forEach((key, value) {
-      final tempProduct = Usuario.fromJson(value);
-      tempProduct.id = key;
-      this.usuario.add(tempProduct);
+    usuariosMap.forEach((key, value) {
+      final tempUser = Usuario.fromJson(value);
+      tempUser.id = key;
+      this.usuario.add(tempUser);
     });
 
     return usuario;
   }
 
-    Future<String> updateUsuario(Usuario usuario) async {
-    final url = Uri.https( _baseUrl, 'usuarios/${ usuario.id }.json' );
-    final resp = await http.put( url, body: usuario.toJson() );
+  Future<String> updateUsuario(Usuario usuario) async {
+    final url = Uri.https(_baseUrl, 'usuarios/${usuario.id}.json');
+    final resp = await http.put(url, body: usuario.toJson());
     final decodedData = resp.body;
-
-    print( decodedData);
 
     return usuario.id!;
   }
 
   Future<String> updateUsuarioRol(String id, String nuevoRol) async {
-  final url = Uri.https(_baseUrl, 'usuarios/$id.json');
-  final resp = await http.patch(url, body: jsonEncode({'rol': nuevoRol}));
-  final decodedData = resp.body;
+    final url = Uri.https(_baseUrl, 'usuarios/$id.json');
 
-  print(decodedData);
+    final resp = await http.patch(url, body: jsonEncode({'rol': nuevoRol}));
+    final decodedData = resp.body;
 
-  return id;
-}
-
+    return id;
+  }
 }
