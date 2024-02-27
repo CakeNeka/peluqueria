@@ -7,19 +7,23 @@ class UsuarioScreen extends StatelessWidget {
   final String nombre;
   final String rol;
 
-  const UsuarioScreen({Key? key, required this.nombre, required this.rol, required this.id})
+  const UsuarioScreen(
+      {Key? key, required this.nombre, required this.rol, required this.id})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     UsuariosServices usuariosServices = UsuariosServices();
-    List<String> listaDeOpciones = <String>["Usuario", "Peluquero"];
+    List<String> listaDeOpciones = <String>["Usuario", "Peluquero", "Gerente"];
     String rolActual = "Usuario";
     for (String opcion in listaDeOpciones) {
       if (opcion == rol) {
         rolActual = opcion;
       }
     }
+    DropList dropList =
+        DropList(rolActual: rolActual, listaDeOpciones: listaDeOpciones);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Gestion de usuarios'),
@@ -37,23 +41,23 @@ class UsuarioScreen extends StatelessWidget {
                   Text(nombre,
                       style:
                           const TextStyle(color: Colors.black87, fontSize: 26)),
-                  DropList(
-                      rolActual: rolActual, listaDeOpciones: listaDeOpciones),
+                  dropList,
                   const TimeSelector(),
                   const TimeSelector(),
                   const DateSelector(),
                   Padding(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black87),
-                    child: const Text("Aplicar",
-                        style: TextStyle(color: Colors.white, fontSize: 20)),
-                    onPressed: () {
-                      usuariosServices.updateUsuarioRol(id, rolActual);
-                    },
-                  )
-                  )
+                      padding: EdgeInsets.only(bottom: 10.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black87),
+                        child: const Text("Aplicar",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 20)),
+                        onPressed: () {
+                          usuariosServices.updateUsuarioRol(
+                              id, dropList.rolActual);
+                        },
+                      ))
                 ],
               ),
             ),
@@ -63,13 +67,13 @@ class UsuarioScreen extends StatelessWidget {
 }
 
 class DropList extends StatelessWidget {
-  const DropList({
+  DropList({
     super.key,
     required this.rolActual,
     required this.listaDeOpciones,
   });
 
-  final String rolActual;
+  String rolActual;
   final List<String> listaDeOpciones;
 
   @override
@@ -89,7 +93,9 @@ class DropList extends StatelessWidget {
         items: listaDeOpciones.map((e) {
           return DropdownMenuItem(value: e, child: Text(e));
         }).toList(),
-        onChanged: (String? value) {},
+        onChanged: (String? value) {
+          rolActual = value ?? "Usuario";
+        },
       ),
     );
   }
