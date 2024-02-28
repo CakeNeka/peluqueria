@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/providers/connected_user_provider.dart';
 import 'package:peluqueria/screens/screens.dart';
-import 'package:peluqueria/services/auth_services.dart';
 import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
 import 'package:provider/provider.dart';
-import 'package:peluqueria/services/usuarios_services.dart';
 
 void main() => runApp(const AppState());
 
@@ -45,6 +44,7 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => UsuariosServices()),
+        ChangeNotifierProvider(create: (_) => ConnectedUserProvider()),
       ],
       child: MyApp(),
     );

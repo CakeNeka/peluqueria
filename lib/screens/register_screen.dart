@@ -3,7 +3,6 @@ import 'package:peluqueria/models/usuario.dart';
 import 'package:peluqueria/providers/register_form_provider.dart';
 import 'package:peluqueria/services/usuarios_services.dart';
 import 'package:peluqueria/widgets/widgets.dart';
-import 'package:peluqueria/providers/login_form_provider.dart';
 import 'package:peluqueria/services/auth_services.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +62,6 @@ class _RegisterForm extends StatelessWidget {
     return Usuario(
       email: registerForm.email,
       genero: registerForm.genero,
-      id: registerForm.id,
       nombre: registerForm.nombre,
       rol: registerForm.rol,
       telefono: registerForm.telefono,
@@ -71,7 +69,7 @@ class _RegisterForm extends StatelessWidget {
     );
   }
 
-  _RegisterForm({
+  const _RegisterForm({
     super.key,
   });
 

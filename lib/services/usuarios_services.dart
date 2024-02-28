@@ -31,6 +31,11 @@ class UsuariosServices extends ChangeNotifier {
     return usuario;
   }
 
+  Future<Usuario?> getUsuarioByEmail(String email) async {
+    List<Usuario> users = await loadUsuarios();
+    return users.where((u) => u.email == email).firstOrNull;
+  }
+
   Future<String> updateUsuario(Usuario usuario) async {
     final url = Uri.https(_baseUrl, 'usuarios/${usuario.id}.json');
     final resp = await http.put(url, body: usuario.toJson());
