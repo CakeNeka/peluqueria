@@ -7,7 +7,6 @@ class AuthService extends ChangeNotifier {
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseToken = 'AIzaSyD6O5QsYa48RSztXMYQFqns9GQZq0X3HYg';
 
-  //Si devolmenos algo, es un error, si no, toco correcto
   Future<String?> createUser(String email, String password) async {
     final Map<String, dynamic> authData = {
       'email': email,
