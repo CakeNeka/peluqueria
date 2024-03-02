@@ -14,22 +14,25 @@ class UsuariosServices extends ChangeNotifier {
     return resp.body;
   }
 
-  Future<List<Usuario>> loadUsuarios() async {
-    notifyListeners();
+Future<List<Usuario>> loadUsuarios() async {
+  notifyListeners();
 
-    final url = Uri.https(_baseUrl, 'usuarios.json');
-    final resp = await http.get(url);
+  final url = Uri.https(_baseUrl, 'usuarios.json');
+  final resp = await http.get(url);
 
-    final Map<String, dynamic> usuariosMap = json.decode(resp.body);
+  final Map<String, dynamic> usuariosMap = json.decode(resp.body);
 
-    usuariosMap.forEach((key, value) {
-      final tempUser = Usuario.fromJson(value);
-      tempUser.id = key;
-      this.usuario.add(tempUser);
-    });
+  this.usuario.clear();
 
-    return usuario;
-  }
+  usuariosMap.forEach((key, value) {
+    final tempUser = Usuario.fromJson(value);
+    tempUser.id = key;
+    this.usuario.add(tempUser);
+  });
+
+  return usuario;
+}
+
 
   Future<Usuario?> getUsuarioByEmail(String email) async {
     List<Usuario> users = await loadUsuarios();

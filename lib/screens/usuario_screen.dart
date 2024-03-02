@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/widgets/widgets.dart';
 import 'package:peluqueria/services/usuarios_services.dart';
+import 'package:provider/provider.dart';
 
 class UsuarioScreen extends StatelessWidget {
   final String id;
@@ -14,6 +15,7 @@ class UsuarioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UsuariosServices usuariosServices = UsuariosServices();
+    DateSelector dateSelector = const DateSelector();
     List<String> listaDeOpciones = <String>["Usuario", "Peluquero", "Gerente"];
     String rolActual = "Usuario";
     for (String opcion in listaDeOpciones) {
@@ -42,9 +44,9 @@ class UsuarioScreen extends StatelessWidget {
                       style:
                           const TextStyle(color: Colors.black87, fontSize: 26)),
                   dropList,
-                  const TimeSelector(),
-                  const TimeSelector(),
-                  const DateSelector(),
+                  const TimeSelector(type: 0),
+                  const TimeSelector(type: 1),
+                  dateSelector,
                   Padding(
                       padding: EdgeInsets.only(bottom: 10.0),
                       child: ElevatedButton(
@@ -56,6 +58,7 @@ class UsuarioScreen extends StatelessWidget {
                         onPressed: () {
                           usuariosServices.updateUsuarioRol(
                               id, dropList.rolActual);
+                           //Provider.of<_DateSelectorState>(context, listen: false).getDaysInBetween();
                         },
                       ))
                 ],
