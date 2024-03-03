@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/providers/connected_user_provider.dart';
 import 'package:peluqueria/screens/screens.dart';
-import 'package:peluqueria/services/auth_services.dart';
 import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -12,18 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UsuariosServices misUsuariosServices = UsuariosServices();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Peluquería',
       initialRoute:
-          'login', // Tiene que ser login. Para pruebas cambiar por home
+          'home', // Tiene que ser login. Para pruebas cambiar por home
       routes: {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterScreen(),
         'home': (_) => HomeScreen(),
         'gestion_horario': (_) =>
             GestionHorarioScreen(), // Calendario y Horario de Apertura
-        'gestion_peluqueros': (_) => GestionPeluquerosScreen(),
+        'gestion_peluqueros': (_) =>
+            GestionPeluquerosScreen(usuariosServices: misUsuariosServices),
         'reservas': (_) => ReservasScreen(),
         'consulta_horarios': (_) => ConsultaHorariosScreen(),
       },
@@ -42,6 +44,8 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => UsuariosServices()),
+        ChangeNotifierProvider(create: (_) => ConnectedUserProvider()),
+        //ChangeNotifierProvider(create: (_) => _DateSelectorState()),
       ],
       child: MyApp(),
     );
