@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/widgets/widgets.dart';
 import 'package:peluqueria/services/usuarios_services.dart';
-import 'package:provider/provider.dart';
 
 class UsuarioScreen extends StatelessWidget {
   final String id;
@@ -58,7 +57,6 @@ class UsuarioScreen extends StatelessWidget {
                         onPressed: () {
                           usuariosServices.updateUsuarioRol(
                               id, dropList.rolActual);
-                           //Provider.of<_DateSelectorState>(context, listen: false).getDaysInBetween();
                         },
                       ))
                 ],

@@ -45,7 +45,6 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => UsuariosServices()),
         ChangeNotifierProvider(create: (_) => ConnectedUserProvider()),
-        //ChangeNotifierProvider(create: (_) => _DateSelectorState()),
       ],
       child: MyApp(),
     );

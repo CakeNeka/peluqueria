@@ -10,6 +10,7 @@ class TimeSelector extends StatefulWidget {
 
 class _TimeSelectorState extends State<TimeSelector> {
   TimeOfDay _horaInicial = TimeOfDay(hour: 7, minute: 15);
+  TimeOfDay _horaFin = TimeOfDay(hour: 12, minute: 45);
 
   Future<void> selectTime(BuildContext context) async {
     final TimeOfDay? horaSeleccionada = await showTimePicker(
@@ -53,7 +54,7 @@ class _TimeSelectorState extends State<TimeSelector> {
        return Container(
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: Colors.black87),
-        child: Text('Hora de salida: ${_horaInicial.format(context)}',
+        child: Text('Hora de salida: ${_horaFin.format(context)}',
             style: const TextStyle(color: Colors.white, fontSize: 20)),
         onPressed: () => selectTime(context),
       ),
