@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DateSelector extends StatefulWidget {
@@ -11,7 +10,7 @@ class DateSelector extends StatefulWidget {
   _DateSelectorState createState() => _DateSelectorState();
 }
 
-class _DateSelectorState extends State<DateSelector> with ChangeNotifier{
+class _DateSelectorState extends State<DateSelector>{
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _rangeStart;
@@ -80,7 +79,6 @@ class _DateSelectorState extends State<DateSelector> with ChangeNotifier{
     for(DateTime day in days) {
       vacationDays.add(day);
     }
-    notifyListeners();
   }
 }
 
