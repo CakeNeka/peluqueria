@@ -33,6 +33,10 @@ Future<List<Usuario>> loadUsuarios() async {
   return usuario;
 }
 
+  Future<Usuario?> getUsuarioById(String id) async {
+    List<Usuario> users = await loadUsuarios();
+    return users.where((u) => u.id == id).firstOrNull;
+  }
 
   Future<Usuario?> getUsuarioByEmail(String email) async {
     List<Usuario> users = await loadUsuarios();
@@ -51,6 +55,24 @@ Future<List<Usuario>> loadUsuarios() async {
     final url = Uri.https(_baseUrl, 'usuarios/$id.json');
 
     final resp = await http.patch(url, body: jsonEncode({'rol': nuevoRol}));
+    final decodedData = resp.body;
+
+    return id;
+  }
+
+    Future<String> updateUsuarioHoraInicio(String id, String horaInicio) async {
+    final url = Uri.https(_baseUrl, 'usuarios/$id.json');
+
+    final resp = await http.patch(url, body: jsonEncode({'horaentrada': horaInicio}));
+    final decodedData = resp.body;
+
+    return id;
+  }
+
+    Future<String> updateUsuarioHoraFin(String id, String horaFin) async {
+    final url = Uri.https(_baseUrl, 'usuarios/$id.json');
+
+    final resp = await http.patch(url, body: jsonEncode({'horasalida': horaFin}));
     final decodedData = resp.body;
 
     return id;
