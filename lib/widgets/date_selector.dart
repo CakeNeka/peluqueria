@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/models/diafestivo.dart';
-import 'package:peluqueria/services/diafestivos_services.';
+import 'package:peluqueria/services/diafestivos_services';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:peluqueria/models/diavacaciones.dart';
 import 'package:peluqueria/services/diavacaciones_services.dart';

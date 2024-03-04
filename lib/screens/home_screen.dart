@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pelu"),
+        title: Text("Página principal"),
       ),
       endDrawer: DefaultDrawer(selectedIndex: _selectedIndex),
     );
