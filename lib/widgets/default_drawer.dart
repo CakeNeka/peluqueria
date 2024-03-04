@@ -15,19 +15,15 @@ class DefaultDrawer extends StatelessWidget {
     var _whatsappURL =
         Uri.parse("https://wa.me/+34666666666?text=${Uri.tryParse("reserva")}");
     if (!await launchUrl(_whatsappURL)) {
-      print("could not launch");
       throw Exception('Could not launch $_whatsappURL');
     }
-    print("OK");
   }
 
   Future<void> _launchPhoneApp() async {
     var _whatsappURL = Uri.parse("tel:+34666666666");
     if (!await launchUrl(_whatsappURL)) {
-      print("could not launch");
       throw Exception('Could not launch $_whatsappURL');
     }
-    print("OK");
   }
 
   @override

@@ -61,14 +61,12 @@ class _LoginForm extends StatelessWidget {
       // Registrar usuario como usuario recién conectado (selecciona por email)
       Usuario? activeUser =
           await usuariosService.getUsuarioByEmail(loginForm.email);
-      print(activeUser?.toJson());
       // Si el login es correcto, activeUser no va a ser nulo
       conectadoProvider.activeUser = activeUser!;
 
       Navigator.pushReplacementNamed(context, 'home');
     } else {
       // Mostrar error en la terminal
-      print(errorMessage);
       showDialog(
         context: context,
         builder: (context) {
