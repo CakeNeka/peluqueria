@@ -74,8 +74,8 @@ class _GestionPeluquerosScreenState extends State<GestionPeluquerosScreen> {
             return UserCard(
                 nombre: filteredUserList[index - 1].nombre,
                 rol: filteredUserList[index - 1].rol,
-                horaInicio: filteredUserList[index - 1].horaInicialLunes ?? "Sin hora",
-                horaFin: filteredUserList[index - 1].horaFinLunes ?? "Sin hora",
+                horaInicio: filteredUserList[index - 1].horaInicial ?? "Sin hora",
+                horaFin: filteredUserList[index - 1].horaFin ?? "Sin hora",
                 id: filteredUserList[index - 1].id ?? "No ID");
           }
         },

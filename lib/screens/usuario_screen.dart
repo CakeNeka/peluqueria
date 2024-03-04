@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/models/diavacaciones.dart';
+import 'package:peluqueria/screens/screens.dart';
+import 'package:peluqueria/services/diavacaciones_services.dart';
+import 'package:peluqueria/services/horario_peluqueros_services.dart';
+import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/widgets/day_of_week_selector.dart';
 import 'package:peluqueria/widgets/widgets.dart';
 import 'package:peluqueria/services/usuarios_services.dart';
@@ -30,6 +35,9 @@ class _UsuarioScreenState extends State<UsuarioScreen> {
   final GlobalKey<DayOfWeekSelectorState> dayOfWeekSelectorKey =
       GlobalKey<DayOfWeekSelectorState>();
 
+  final GlobalKey<DateSelectorState> dateSelectorKey =
+      GlobalKey<DateSelectorState>();
+
   @override
   void initState() {
     super.initState();
@@ -41,14 +49,23 @@ class _UsuarioScreenState extends State<UsuarioScreen> {
     return dayOfWeekSelectorKey.currentState!.getSelectedDay();
   }
 
+  List<DateTime> getSelectedDates() {
+    return dateSelectorKey.currentState!.obtenerDiasSeleccionados();
+  }
+
   @override
   Widget build(BuildContext context) {
     UsuariosServices usuariosServices = UsuariosServices();
+    DiaVacacionesServices diaVacacionesServices = DiaVacacionesServices();
     TimeSelector timeSelector1;
     TimeSelector timeSelector2;
-    DateSelector dateSelector = const DateSelector();
+    HorarioPeluquerosServices horarioPeluquerosServices =
+        HorarioPeluquerosServices();
+    DateSelector dateSelector =
+        DateSelector(key: dateSelectorKey, id: widget.id);
     List<String> listaDeOpciones = <String>["Usuario", "Peluquero", "Gerente"];
     String rolActual = "Usuario";
+    diaVacacionesServices.getFechaByIdUsuario(widget.id);
     for (String opcion in listaDeOpciones) {
       if (opcion == widget.rol) {
         rolActual = opcion;
@@ -75,88 +92,75 @@ class _UsuarioScreenState extends State<UsuarioScreen> {
                     style:
                         const TextStyle(color: Colors.black87, fontSize: 26)),
                 dropList,
-                timeSelector1 = TimeSelector(
-                  type: 0,
-                  id: widget.id,
-                  onTimeSelected: (time) {
-                    setState(() {
-                      horaInicioSeleccionada = time;
-                    });
-                  },
-                ),
-                timeSelector2 = TimeSelector(
-                  type: 1,
-                  id: widget.id,
-                  onTimeSelected: (time) {
-                    setState(() {
-                      horaFinSeleccionada = time;
-                    });
-                  },
-                ),
-                DayOfWeekSelector(
-                  key: dayOfWeekSelectorKey,
-                ),
-                dateSelector,
+                if (widget.rol != "Usuario" && widget.rol != "usuario") ...[
+                  timeSelector1 = TimeSelector(
+                    type: 0,
+                    id: widget.id,
+                    onTimeSelected: (time) {
+                      setState(() {
+                        horaInicioSeleccionada = time;
+                      });
+                    },
+                  ),
+                  timeSelector2 = TimeSelector(
+                    type: 1,
+                    id: widget.id,
+                    onTimeSelected: (time) {
+                      setState(() {
+                        horaFinSeleccionada = time;
+                      });
+                    },
+                  ),
+                  DayOfWeekSelector(
+                    key: dayOfWeekSelectorKey,
+                  ),
+                  dateSelector,
+                ],
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black87),
+                      backgroundColor: Colors.black87,
+                    ),
                     child: const Text(
                       "Aplicar",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     onPressed: () {
-                      usuariosServices.updateUsuarioRol(
-                          widget.id, dropList.rolActual);
-                      String horaInicioFormatted =
-                          '${horaInicioSeleccionada.hour.toString().padLeft(2, '0')}:${horaInicioSeleccionada.minute.toString().padLeft(2, '0')}';
-                      String horaFinFormatted =
-                          '${horaFinSeleccionada.hour.toString().padLeft(2, '0')}:${horaFinSeleccionada.minute.toString().padLeft(2, '0')}';
-                      String selectedDay = getSelectedDay();
-                      switch (selectedDay) {
-                        case 'Lunes':
-                          usuariosServices.updateUsuarioHoraInicioLunes(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinLunes(
-                              widget.id, horaFinFormatted);
-                          break;
-                        case 'Martes':
-                          usuariosServices.updateUsuarioHoraInicioMartes(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinMartes(
-                              widget.id, horaFinFormatted);
-                          break;
-                        case 'Miércoles':
-                          usuariosServices.updateUsuarioHoraInicioMiercoles(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinMiercoles(
-                              widget.id, horaFinFormatted);
-                          break;
-                        case 'Jueves':
-                          usuariosServices.updateUsuarioHoraInicioJueves(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinJueves(
-                              widget.id, horaFinFormatted);
-                          break;
-                        case 'Viernes':
-                          usuariosServices.updateUsuarioHoraInicioViernes(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinViernes(
-                              widget.id, horaFinFormatted);
-                          break;
-                        case 'Sábado':
-                          usuariosServices.updateUsuarioHoraInicioSabado(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinSabado(
-                              widget.id, horaFinFormatted);
-                          break;
-                        case 'Domingo':
-                          usuariosServices.updateUsuarioHoraInicioDomingo(
-                              widget.id, horaInicioFormatted);
-                          usuariosServices.updateUsuarioHoraFinDomingo(
-                              widget.id, horaFinFormatted);
-                          break;
+                      if (widget.rol != "Usuario" && widget.rol != "usuario") {
+                        usuariosServices.updateUsuarioRol(
+                            widget.id, dropList.rolActual);
+                        String horaInicioFormatted =
+                            '${horaInicioSeleccionada.hour.toString().padLeft(2, '0')}:${horaInicioSeleccionada.minute.toString().padLeft(2, '0')}';
+                        String horaFinFormatted =
+                            '${horaFinSeleccionada.hour.toString().padLeft(2, '0')}:${horaFinSeleccionada.minute.toString().padLeft(2, '0')}';
+                        horarioPeluquerosServices.updateHorarioHoraEntradaYHoraSalida(
+                            widget.id, getSelectedDay(), horaInicioFormatted, horaFinFormatted );
+                        List<DateTime> selectedDates = getSelectedDates();
+                        selectedDates.forEach((date) {
+                          String dateFormat = date.toString().substring(0, 10);
+                          print(dateFormat);
+                          DiaVacaciones diaVacaciones = DiaVacaciones(
+                              fecha: dateFormat, idUsuario: widget.id);
+                          diaVacacionesServices
+                              .saveDiaVacaciones(diaVacaciones);
+                        });
+                        diaVacacionesServices.loadDiaVacaciones();
+                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GestionPeluquerosScreen(
+                                    usuariosServices: usuariosServices)));
+                      } else {
+                        usuariosServices.updateUsuarioRol(
+                            widget.id, dropList.rolActual);
+                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GestionPeluquerosScreen(
+                                    usuariosServices: usuariosServices)));
                       }
                     },
                   ),
@@ -172,10 +176,10 @@ class _UsuarioScreenState extends State<UsuarioScreen> {
 
 class DropList extends StatelessWidget {
   DropList({
-    super.key,
+    Key? key,
     required this.rolActual,
     required this.listaDeOpciones,
-  });
+  }) : super(key: key);
 
   String rolActual;
   final List<String> listaDeOpciones;
