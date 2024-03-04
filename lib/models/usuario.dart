@@ -7,6 +7,8 @@ class Usuario {
   String nombre;
   String rol;
   String telefono;
+  String? horaInicial;
+  String? horaFin;
   bool verificado = false;
 
   Usuario({
@@ -16,6 +18,8 @@ class Usuario {
     required this.nombre,
     required this.rol,
     required this.telefono,
+    this.horaInicial,
+    this.horaFin,
     required this.verificado,
   });
 
@@ -29,6 +33,8 @@ class Usuario {
         nombre: json["nombre"],
         rol: json["rol"],
         telefono: json["telefono"],
+        horaInicial: json["horainicial"],
+        horaFin: json["horaFin"],
         verificado: json["verificado"],
       );
 
@@ -38,6 +44,8 @@ class Usuario {
         "nombre": nombre,
         "rol": rol,
         "telefono": telefono,
+        "horaInicial": horaInicial,
+        "horaFin": horaFin,
         "verificado": verificado,
       };
 }

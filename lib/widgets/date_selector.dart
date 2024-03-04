@@ -4,14 +4,17 @@ import 'package:table_calendar/table_calendar.dart';
 class DateSelector extends StatefulWidget {
   const DateSelector({Key? key}) : super(key: key);
 
+  get vacationDays => null;
+
   @override
   _DateSelectorState createState() => _DateSelectorState();
 }
 
-class _DateSelectorState extends State<DateSelector> {
+class _DateSelectorState extends State<DateSelector>{
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime? _rangeStart;
+  DateTime? _rangeEnd;
 
   List<DateTime> vacationDays = [
     DateTime.utc(2024, 3, 19),
@@ -24,9 +27,9 @@ class _DateSelectorState extends State<DateSelector> {
         child: Padding(
       padding: EdgeInsets.only(top: 10.0, bottom: 25.0),
       child: TableCalendar(
-    calendarStyle: CalendarStyle(
-    holidayTextStyle: TextStyle(color: Colors.red),
-    ),
+        calendarStyle: CalendarStyle(
+          holidayTextStyle: TextStyle(color: Colors.red),
+        ),
         availableCalendarFormats: const {
           CalendarFormat.month: 'Mes',
         },
@@ -34,12 +37,18 @@ class _DateSelectorState extends State<DateSelector> {
         lastDay: DateTime.utc(2030, 1, 1),
         focusedDay: _focusedDay,
         calendarFormat: _calendarFormat,
-        selectedDayPredicate: (day) {
-          return isSameDay(_selectedDay, day);
-        },
+        rangeStartDay: _rangeStart,
+        rangeEndDay: _rangeEnd,
         onDaySelected: (selectedDay, focusedDay) {
+          if (_rangeStart == null) {
+            _rangeStart = selectedDay;
+          } else if (_rangeEnd == null || selectedDay.isBefore(_rangeStart!)) {
+            _rangeEnd = _rangeStart;
+            _rangeStart = selectedDay;
+          } else if (selectedDay.isAfter(_rangeStart!)) {
+            _rangeEnd = selectedDay;
+          }
           setState(() {
-            _selectedDay = selectedDay;
             _focusedDay = focusedDay;
           });
         },
@@ -59,6 +68,17 @@ class _DateSelectorState extends State<DateSelector> {
         },
       ),
     ));
+  }
+  void getDaysInBetween() {
+    List<DateTime> days = [];
+    DateTime? startDate = _rangeStart;
+    DateTime? endDate = _rangeEnd;
+    for (int i = 0; i <= endDate!.difference(startDate!).inDays; i++) {
+      days.add(startDate!.add(Duration(days: i)));
+    }
+    for(DateTime day in days) {
+      vacationDays.add(day);
+    }
   }
 }
 
