@@ -15,19 +15,15 @@ class DefaultDrawer extends StatelessWidget {
     var _whatsappURL =
         Uri.parse("https://wa.me/+34666666666?text=${Uri.tryParse("reserva")}");
     if (!await launchUrl(_whatsappURL)) {
-      print("could not launch");
       throw Exception('Could not launch $_whatsappURL');
     }
-    print("OK");
   }
 
   Future<void> _launchPhoneApp() async {
     var _whatsappURL = Uri.parse("tel:+34666666666");
     if (!await launchUrl(_whatsappURL)) {
-      print("could not launch");
       throw Exception('Could not launch $_whatsappURL');
     }
-    print("OK");
   }
 
   @override
@@ -35,7 +31,6 @@ class DefaultDrawer extends StatelessWidget {
     final userProvider =
         Provider.of<ConnectedUserProvider>(context, listen: false);
     String rol = userProvider.getActiveUserRol().toLowerCase();
-    print(userProvider.activeUser.toJson());
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -44,6 +39,12 @@ class DefaultDrawer extends StatelessWidget {
             accountName:
                 Text("Conectado como: ${userProvider.activeUser.nombre}"),
             accountEmail: Text("Rol: $rol"),
+          ),
+          ListTile(
+            title: const Text('Cerrar sesión'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'login');
+            },
           ),
           ListTile(
             title: const Text('Página Principal'),
@@ -81,13 +82,6 @@ class DefaultDrawer extends StatelessWidget {
             selected: selectedIndex == 4,
             onTap: () {
               Navigator.pushReplacementNamed(context, 'reservas');
-            },
-          ),
-          ListTile(
-            title: const Text('Consulta Horarios Disponibles'),
-            selected: selectedIndex == 5,
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'consulta_horarios');
             },
           ),
           Divider(

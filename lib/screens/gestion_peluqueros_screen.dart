@@ -40,7 +40,7 @@ class _GestionPeluquerosScreenState extends State<GestionPeluquerosScreen> {
         backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
       ),
-      endDrawer: const DefaultDrawer(selectedIndex: 2),
+      endDrawer: const DefaultDrawer(selectedIndex: 3),
       body: ListView.builder(
         itemCount: filteredUserList.length + 1,
         itemBuilder: (context, index) {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:peluqueria/models/dia_festivo.dart';
 import 'package:peluqueria/models/models.dart';
 import 'package:peluqueria/services/dias_festivos_services.dart';
+import 'package:peluqueria/models/diafestivo.dart';
+import 'package:peluqueria/services/diafestivos_services';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:peluqueria/models/diavacaciones.dart';
 import 'package:peluqueria/services/diavacaciones_services.dart';

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/providers/connected_user_provider.dart';
+import 'package:peluqueria/providers/dia_festivo_form_provider.dart';
 import 'package:peluqueria/screens/gestion_calendario_screen.dart';
 import 'package:peluqueria/screens/screens.dart';
+import 'package:peluqueria/services/reservas_services.dart';
 import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Peluquería',
       initialRoute:
-          'home', // Tiene que ser login. Para pruebas cambiar por home
+          'login', // Tiene que ser login. Para pruebas cambiar por home
       routes: {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterScreen(),
@@ -48,6 +50,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthService()),
+        ChangeNotifierProvider(create: (_) => ReservasServices()),
         ChangeNotifierProvider(create: (_) => UsuariosServices()),
         ChangeNotifierProvider(create: (_) => ConnectedUserProvider()),
         ChangeNotifierProvider(create: (_) => DiasServices()),

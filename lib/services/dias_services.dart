@@ -33,9 +33,6 @@ class DiasServices extends ChangeNotifier {
     final resp = await http.put(url, body: dia.toRawJson());
     final decodedData = resp.body;
 
-    // ignore: avoid_print
-    print(decodedData);
-
     final index = dias.indexWhere((element) => element.id == dia.id);
     dias[index] = dia;
 
