@@ -34,8 +34,8 @@ class _TimeSelectorState extends State<TimeSelector> {
   void loadUser() async {
     usuario = await usuariosServices.getUsuarioById(widget.id);
     setState(() {
-      String horaInicio = usuario?.horaInicial ?? "7:15";
-      String horaFinal = usuario?.horaFin ?? "12:45";
+      String horaInicio = usuario?.horaInicialLunes ?? "7:15";
+      String horaFinal = usuario?.horaFinLunes ?? "12:45";
       _horaInicial = TimeOfDay(
           hour: int.parse(horaInicio.split(":")[0]),
           minute: int.parse(horaInicio.split(":")[1]));

@@ -19,13 +19,13 @@ class _DateSelectorState extends State<DateSelector> {
   DateTime? _rangeEnd;
 
   late List<DiaVacaciones> vacationDays = List.empty();
-  late List<DiaFestivo> festiveDays = List.empty();
+  //late List<DiaFestivo> festiveDays = List.empty();
 
   @override
   void initState() {
     super.initState();
     cargarDiasVacaciones();
-    cargarDiasFestivos();
+    //cargarDiasFestivos();
   }
 
   Future<void> cargarDiasVacaciones() async {
@@ -36,13 +36,13 @@ class _DateSelectorState extends State<DateSelector> {
     setState(() {});
   }
 
-  Future<void> cargarDiasFestivos() async {
+  /*Future<void> cargarDiasFestivos() async {
     final diaFestivoServices = DiaFestivoServices();
     List<String> diasString =
         (await diaFestivoServices.loadDiaFestivo()).cast<String>();
     festiveDays = diasString.cast<DiaFestivo>();
     setState(() {});
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +91,9 @@ class _DateSelectorState extends State<DateSelector> {
               events.add(Event('Vacaciones'));
             }
             
-            if (festiveDays.any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
+            /*if (festiveDays.any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
               events.add(Event('Festivo'));
-            }
+            }*/
 
             return events;
           },
