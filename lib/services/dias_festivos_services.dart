@@ -50,8 +50,7 @@ class DiasFestivosServices extends ChangeNotifier {
     final url = Uri.https(_baseUrl, 'diasfestivos/${diaFestivo.id}.json');
     final resp = await http.put(url, body: diaFestivo.toRawJson());
     final decodedData = resp.body;
-    // ignore: avoid_print
-    print(decodedData);
+
     final index =
         diasFestivos.indexWhere((element) => element.id == diaFestivo.id);
     diasFestivos[index] = diaFestivo;

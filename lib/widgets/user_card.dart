@@ -5,8 +5,10 @@ class UserCard extends StatelessWidget {
   final String nombre;
   final String rol;
   final String id;
+  final String horaInicio;
+  final String horaFin;
 
-  UserCard({Key? key, required this.nombre, required this.rol, required this.id})
+  UserCard({Key? key, required this.nombre, required this.rol, required this.id, required this.horaInicio, required this.horaFin})
       : super(key: key);
 
   @override
@@ -53,7 +55,7 @@ class UserCard extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => UsuarioScreen(nombre: nombre, rol: rol, id: id))
+                    MaterialPageRoute(builder: (context) => UsuarioScreen(nombre: nombre, rol: rol, id: id, horaInicio: horaInicio, horaFin: horaFin))
                   );
                 },
                 child: const Text('Ver',

@@ -61,21 +61,29 @@ class _LoginForm extends StatelessWidget {
       // Registrar usuario como usuario recién conectado (selecciona por email)
       Usuario? activeUser =
           await usuariosService.getUsuarioByEmail(loginForm.email);
-      print(activeUser?.toJson());
       // Si el login es correcto, activeUser no va a ser nulo
       conectadoProvider.activeUser = activeUser!;
 
       Navigator.pushReplacementNamed(context, 'home');
     } else {
       // Mostrar error en la terminal
-      print(errorMessage);
-      showDialog(
+      showDialog<String>(
         context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Credenciales Incorrectas, $errorMessage'),
-          );
-        },
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Credenciales incorrectas'),
+          content: const Text(
+              'El usuario o contraseña introducidos no son correctos, intentálo de nuevo'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text(
+                'OK',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       );
       loginForm.isLoading = false;
     }
@@ -84,10 +92,8 @@ class _LoginForm extends StatelessWidget {
   void biometricLogin(LoginFormProvider loginForm, context) async {
     LocalAuthentication auth = LocalAuthentication();
     bool deviceSupported = await auth.isDeviceSupported();
-    print("Device supported: $deviceSupported");
     List<BiometricType> availableBiometrics =
         await auth.getAvailableBiometrics();
-    print(availableBiometrics);
     try {
       // Mostrar diálogo de acceso con huella
       bool authenticated = await auth.authenticate(
@@ -97,7 +103,6 @@ class _LoginForm extends StatelessWidget {
             stickyAuth: true, // No falla si la aplicación pasa a segundo plano
             biometricOnly: true, // Impide uso de PIN
           ));
-      print(authenticated);
       if (authenticated) {
         // Si la huella es correcta, comprueba que existan credenciales almacenadas
         final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -107,21 +112,26 @@ class _LoginForm extends StatelessWidget {
           loginForm.password = prefs.getString('password')!;
           await tryLogin(loginForm, context);
         } else {
-          print("Imposible :(");
-          showDialog(
+          showDialog<String>(
             context: context,
-            builder: (context) {
-              return const AlertDialog(
-                title:
-                    Text('No hay credenciales almacenadas en el dispositivo'),
-              );
-            },
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Error'),
+              content: const Text(
+                'No hay credenciales almacenadas en el dispositivo',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
           );
         }
       }
-    } on PlatformException catch (e) {
-      print(e);
-    }
+    } on PlatformException catch (e) {}
   }
 
   _LoginForm({

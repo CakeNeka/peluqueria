@@ -1,0 +1,35 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:peluqueria/models/diafestivo.dart';
+
+/*class DiaFestivoServices extends ChangeNotifier {
+  final String _baseUrl =
+      "pelu-siemens-default-rtdb.europe-west1.firebasedatabase.app";
+  final List<DiaFestivo> diafestivo = [];
+
+  Future<String> saveDiaFestivo(DiaFestivo dia) async {
+    final url = Uri.https(_baseUrl, 'diasfestivos.json');
+    final resp = await http.post(url, body: dia.toRawJson());
+    return resp.body;
+  }
+
+Future<List<DiaFestivo>> loadDiaFestivo() async {
+  notifyListeners();
+
+  final url = Uri.https(_baseUrl, 'diasfestivos.json');
+  final resp = await http.get(url);
+
+  final Map<String, dynamic> diasMap = json.decode(resp.body);
+
+  this.diafestivo.clear();
+
+  diasMap.forEach((key, value) {
+    final tempDia = DiaFestivo.fromJson(value);
+    tempDia.id = key;
+    this.diafestivo.add(tempDia);
+  });
+
+  return diafestivo;
+}
+}*/

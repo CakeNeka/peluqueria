@@ -40,7 +40,7 @@ class _GestionPeluquerosScreenState extends State<GestionPeluquerosScreen> {
         backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
       ),
-      endDrawer: const DefaultDrawer(selectedIndex: 2),
+      endDrawer: const DefaultDrawer(selectedIndex: 3),
       body: ListView.builder(
         itemCount: filteredUserList.length + 1,
         itemBuilder: (context, index) {
@@ -74,6 +74,8 @@ class _GestionPeluquerosScreenState extends State<GestionPeluquerosScreen> {
             return UserCard(
                 nombre: filteredUserList[index - 1].nombre,
                 rol: filteredUserList[index - 1].rol,
+                horaInicio: filteredUserList[index - 1].horaInicialLunes ?? "Sin hora",
+                horaFin: filteredUserList[index - 1].horaFinLunes ?? "Sin hora",
                 id: filteredUserList[index - 1].id ?? "No ID");
           }
         },

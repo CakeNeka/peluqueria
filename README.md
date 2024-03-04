@@ -1,21 +1,11 @@
-# Peluqueria
 
-> _Proyecto final de Programación Multimedia_
+<h1 align="center">Peluqueria</h1>
+<div align="center">
+<img width="100" src="assets/cut_material_icon.svg" />
+</div>
 
-### [Requerimientos](./requirements.md)
 
-
-<!-- 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
--->
+> ### Índice
+> -  [Requerimientos](./requirements.md)
+> -  [Descripción del proyecto](#)
+> -  [Integrantes del grupo](#)
