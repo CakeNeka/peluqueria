@@ -33,8 +33,8 @@ class Usuario {
         nombre: json["nombre"],
         rol: json["rol"],
         telefono: json["telefono"],
-        horaInicial: json["horainicial"],
-        horaFin: json["horaFin"],
+        horaInicial: json["horaentrada"],
+        horaFin: json["horasalida"],
         verificado: json["verificado"],
       );
 
@@ -44,8 +44,8 @@ class Usuario {
         "nombre": nombre,
         "rol": rol,
         "telefono": telefono,
-        "horaInicial": horaInicial,
-        "horaFin": horaFin,
+        "horaentrada": horaInicial,
+        "horasalida": horaFin,
         "verificado": verificado,
       };
 }
