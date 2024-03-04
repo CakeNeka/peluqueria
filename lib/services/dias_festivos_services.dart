@@ -35,12 +35,15 @@ class DiasFestivosServices extends ChangeNotifier {
     } else {
       await updateDiaFestivo(diaFestivo);
     }
+    notifyListeners();
   }
 
   Future<String> createDiaFestivo(DiaFestivo diaFestivo) async {
     final url = Uri.https(_baseUrl, 'diasfestivos.json');
     final resp = await http.post(url, body: diaFestivo.toRawJson());
-    return resp.body;
+    diaFestivo.id = resp.body;
+    diasFestivos.add(diaFestivo);
+    return diaFestivo.id!;
   }
 
   Future<String> updateDiaFestivo(DiaFestivo diaFestivo) async {
@@ -51,8 +54,6 @@ class DiasFestivosServices extends ChangeNotifier {
     final index =
         diasFestivos.indexWhere((element) => element.id == diaFestivo.id);
     diasFestivos[index] = diaFestivo;
-
-    notifyListeners();
     return diaFestivo.id!;
   }
 }
