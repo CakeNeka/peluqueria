@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:peluqueria/models/dia_festivo.dart';
 import 'package:peluqueria/services/services.dart';
+import 'package:peluqueria/theme/app_theme.dart';
 import 'package:peluqueria/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -33,8 +35,11 @@ class GestionHorarioCalendarioScreen extends StatelessWidget {
       endDrawer: const DefaultDrawer(selectedIndex: 2),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          diasFestivosService.diaFestivoSeleccionado =
+              DiaFestivo(day: 1, month: 1, year: 2000, festiveName: "");
           Navigator.pushNamed(context, 'dia_festivo');
         },
+        backgroundColor: AppTheme.primary,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
