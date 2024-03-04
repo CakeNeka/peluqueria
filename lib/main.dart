@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Peluquería',
       initialRoute:
-          'home', // Tiene que ser login. Para pruebas cambiar por home
+          'login', // Tiene que ser login. Para pruebas cambiar por home
       routes: {
         'login': (_) => LoginScreen(),
         'register': (_) => RegisterScreen(),
