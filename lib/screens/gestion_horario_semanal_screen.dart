@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/services/dias_services.dart';
-import 'package:peluqueria/widgets/day_card.dart';
 import 'package:peluqueria/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 

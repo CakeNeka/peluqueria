@@ -7,20 +7,8 @@ class Usuario {
   String nombre;
   String rol;
   String telefono;
-  String? horaInicialLunes;
-  String? horaFinLunes;
-  String? horaInicialMartes;
-  String? horaFinMartes;
-  String? horaInicialMiercoles;
-  String? horaFinMiercoles;
-  String? horaInicialJueves;
-  String? horaFinJueves;
-  String? horaInicialViernes;
-  String? horaFinViernes;
-  String? horaInicialSabado;
-  String? horaFinSabado;
-  String? horaInicialDomingo;
-  String? horaFinDomingo;
+  String? horaInicial;
+  String? horaFin;
   bool verificado = false;
 
   Usuario({
@@ -30,20 +18,8 @@ class Usuario {
     required this.nombre,
     required this.rol,
     required this.telefono,
-    this.horaInicialLunes,
-    this.horaFinLunes,
-    this.horaInicialMartes,
-    this.horaFinMartes,
-    this.horaInicialMiercoles,
-    this.horaFinMiercoles,
-    this.horaInicialJueves,
-    this.horaFinJueves,
-    this.horaInicialViernes,
-    this.horaFinViernes,
-    this.horaInicialSabado,
-    this.horaFinSabado,
-    this.horaInicialDomingo,
-    this.horaFinDomingo,
+    this.horaInicial,
+    this.horaFin,
     required this.verificado,
   });
 
@@ -57,20 +33,8 @@ class Usuario {
         nombre: json["nombre"],
         rol: json["rol"],
         telefono: json["telefono"],
-        horaInicialLunes: json["horaentradalunes"],
-        horaFinLunes: json["horasalidalunes"],
-        horaInicialMartes: json["horaentradamartes"],
-        horaFinMartes: json["horasalidamartes"],
-        horaInicialMiercoles: json["horaentradamiercoles"],
-        horaFinMiercoles: json["horasalidamiercoles"],
-        horaInicialJueves: json["horaentradajueves"],
-        horaFinJueves: json["horasalidajueves"],
-        horaInicialViernes: json["horaentradaviernes"],
-        horaFinViernes: json["horasalidaviernes"],
-        horaInicialSabado: json["horaentradasabado"],
-        horaFinSabado: json["horasalidasabado"],
-        horaInicialDomingo: json["horaentradadomingo"],
-        horaFinDomingo: json["horasalidadomingo"],
+        horaInicial: json["horaentrada"],
+        horaFin: json["horasalida"],
         verificado: json["verificado"],
       );
 
@@ -80,20 +44,8 @@ class Usuario {
         "nombre": nombre,
         "rol": rol,
         "telefono": telefono,
-        "horaentradalunes": horaInicialLunes,
-        "horasalidalunes": horaFinLunes,
-        "horaentradamartes": horaInicialMartes,
-        "horasalidamartes": horaFinMartes,
-        "horaentradamiercoles": horaInicialMiercoles,
-        "horasalidamiercoles": horaFinMiercoles,
-        "horaentradajueves": horaInicialJueves,
-        "horasalidajueves": horaFinJueves,
-        "horaentradaviernes": horaInicialViernes,
-        "horasalidaviernes": horaFinViernes,
-        "horaentradasabado": horaInicialSabado,
-        "horasalidasabado": horaFinSabado,
-        "horaentradadomingo": horaInicialDomingo,
-        "horasalidadomingo": horaFinDomingo,
+        "horaentrada": horaInicial,
+        "horasalida": horaFin,
         "verificado": verificado,
       };
 }

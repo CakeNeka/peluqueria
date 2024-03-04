@@ -1,48 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:peluqueria/models/diafestivo.dart';
-import 'package:peluqueria/services/diafestivos_services';
+import 'package:peluqueria/models/dia_festivo.dart';
+import 'package:peluqueria/models/models.dart';
+import 'package:peluqueria/services/dias_festivos_services.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:peluqueria/models/diavacaciones.dart';
 import 'package:peluqueria/services/diavacaciones_services.dart';
 
 class DateSelector extends StatefulWidget {
-  const DateSelector({Key? key}) : super(key: key);
+  static final GlobalKey<DateSelectorState> dateSelectorKey =
+      GlobalKey<DateSelectorState>();
+
+  final String id;
+
+  const DateSelector({Key? key, required this.id}) : super(key: key);
 
   @override
-  _DateSelectorState createState() => _DateSelectorState();
+  DateSelectorState createState() => DateSelectorState();
 }
 
-class _DateSelectorState extends State<DateSelector> {
+class DateSelectorState extends State<DateSelector> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
 
   late List<DiaVacaciones> vacationDays = List.empty();
-  //late List<DiaFestivo> festiveDays = List.empty();
+  late List<DiaFestivo> festiveDays = List.empty();
 
   @override
   void initState() {
     super.initState();
     cargarDiasVacaciones();
-    //cargarDiasFestivos();
+    cargarDiasFestivos();
   }
 
   Future<void> cargarDiasVacaciones() async {
     final diaVacacionesServices = DiaVacacionesServices();
     List<String> diasString =
-        (await diaVacacionesServices.loadDiaVacaciones()).cast<String>();
+        (await diaVacacionesServices.getFechaByIdUsuario(widget.id))
+            .cast<String>();
     vacationDays = diasString.cast<DiaVacaciones>();
     setState(() {});
   }
 
-  /*Future<void> cargarDiasFestivos() async {
-    final diaFestivoServices = DiaFestivoServices();
+  Future<void> cargarDiasFestivos() async {
+    final diaFestivoServices = DiasFestivosServices();
     List<String> diasString =
-        (await diaFestivoServices.loadDiaFestivo()).cast<String>();
+        (await diaFestivoServices.loadDiasFestivos()).cast<String>();
     festiveDays = diasString.cast<DiaFestivo>();
     setState(() {});
-  }*/
+  }
+
+  List<DateTime> obtenerDiasSeleccionados() {
+    List<DateTime> daysSelected = [];
+    if (_rangeStart != null && _rangeEnd != null) {
+      DateTime currentDay = _rangeStart!;
+      while (!currentDay.isAfter(_rangeEnd!)) {
+        daysSelected.add(currentDay);
+        currentDay = currentDay.add(Duration(days: 1));
+      }
+    }
+    return daysSelected;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +69,7 @@ class _DateSelectorState extends State<DateSelector> {
       child: Padding(
         padding: EdgeInsets.only(top: 10.0, bottom: 25.0),
         child: TableCalendar(
+          key: DateSelector.dateSelectorKey,
           calendarStyle: CalendarStyle(
             holidayTextStyle: TextStyle(color: Colors.red),
           ),
@@ -87,10 +107,11 @@ class _DateSelectorState extends State<DateSelector> {
           eventLoader: (day) {
             final List<Event> events = [];
 
-            if (vacationDays.any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
+            if (vacationDays
+                .any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
               events.add(Event('Vacaciones'));
             }
-            
+
             /*if (festiveDays.any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
               events.add(Event('Festivo'));
             }*/

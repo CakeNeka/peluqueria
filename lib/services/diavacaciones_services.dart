@@ -14,22 +14,29 @@ class DiaVacacionesServices extends ChangeNotifier {
     return resp.body;
   }
 
-Future<List<DiaVacaciones>> loadDiaVacaciones() async {
-  notifyListeners();
+  Future<List<DiaVacaciones>> loadDiaVacaciones() async {
+    notifyListeners();
 
-  final url = Uri.https(_baseUrl, 'diasvacaciones.json');
-  final resp = await http.get(url);
+    final url = Uri.https(_baseUrl, 'diasvacaciones.json');
+    final resp = await http.get(url);
 
-  final Map<String, dynamic> diasMap = json.decode(resp.body);
+    final Map<String, dynamic> diasMap = json.decode(resp.body);
 
-  this.diavacaciones.clear();
+    this.diavacaciones.clear();
 
-  diasMap.forEach((key, value) {
-    final tempDia = DiaVacaciones.fromJson(value);
-    tempDia.id = key;
-    this.diavacaciones.add(tempDia);
-  });
+    diasMap.forEach((key, value) {
+      final tempDia = DiaVacaciones.fromJson(value);
+      tempDia.id = key;
+      this.diavacaciones.add(tempDia);
+    });
 
-  return diavacaciones;
-}
+    return diavacaciones;
+  }
+
+  Future<List<DiaVacaciones>> getFechaByIdUsuario(String idUsuario) async {
+    List<DiaVacaciones> vacaciones = await loadDiaVacaciones();
+    return vacaciones
+        .where((vacacion) => vacacion.idUsuario == idUsuario)
+        .toList();
+  }
 }
