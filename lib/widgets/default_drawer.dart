@@ -31,7 +31,6 @@ class DefaultDrawer extends StatelessWidget {
     final userProvider =
         Provider.of<ConnectedUserProvider>(context, listen: false);
     String rol = userProvider.getActiveUserRol().toLowerCase();
-    print(userProvider.activeUser.toJson());
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -40,6 +39,12 @@ class DefaultDrawer extends StatelessWidget {
             accountName:
                 Text("Conectado como: ${userProvider.activeUser.nombre}"),
             accountEmail: Text("Rol: $rol"),
+          ),
+          ListTile(
+            title: const Text('Cerrar sesión'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'login');
+            },
           ),
           ListTile(
             title: const Text('Página Principal'),

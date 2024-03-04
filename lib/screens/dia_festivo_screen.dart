@@ -16,9 +16,7 @@ class DiaFestivoScreen extends StatelessWidget {
         firstDate: DateTime(2000),
         lastDate: DateTime(2101),
       );
-      if (pickedDate != null) {
-        print('Fecha seleccionada: $pickedDate');
-      }
+      if (pickedDate != null) {}
     }
 
     return Scaffold(

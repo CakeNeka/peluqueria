@@ -45,14 +45,28 @@ class _RegisterForm extends StatelessWidget {
       registerForm.isLoading = false;
       Navigator.pushReplacementNamed(context, 'login');
     } else {
-      print(errorMessage);
-      showDialog(
+      showDialog<String>(
         context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('No se ha podido crear la cuenta, $errorMessage'),
-          );
-        },
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Error'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Ha sido imposible crear la cuenta'),
+              Text('Mensaje de error: $errorMessage'),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text(
+                'OK',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       );
       registerForm.isLoading = false;
     }

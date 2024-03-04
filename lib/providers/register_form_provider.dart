@@ -19,7 +19,6 @@ class RegisterFormProvider extends ChangeNotifier {
   }
 
   bool isValidForm() {
-    print('$email - $password - $nombre');
     return formKey.currentState?.validate() ?? false;
   }
 }
