@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:peluqueria/models/dia_festivo.dart';
 import 'package:peluqueria/models/models.dart';
 import 'package:peluqueria/services/dias_festivos_services.dart';
-import 'package:peluqueria/models/diafestivo.dart';
-import 'package:peluqueria/services/diafestivos_services';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:peluqueria/models/diavacaciones.dart';
 import 'package:peluqueria/services/diavacaciones_services.dart';
-import 'package:peluqueria/models/usuario.dart';
 
 class DateSelector extends StatefulWidget {
-  static final GlobalKey<DateSelectorState> dateSelectorKey = GlobalKey<DateSelectorState>();
+  static final GlobalKey<DateSelectorState> dateSelectorKey =
+      GlobalKey<DateSelectorState>();
 
   final String id;
 
@@ -39,7 +37,8 @@ class DateSelectorState extends State<DateSelector> {
   Future<void> cargarDiasVacaciones() async {
     final diaVacacionesServices = DiaVacacionesServices();
     List<String> diasString =
-        (await diaVacacionesServices.getFechaByIdUsuario(widget.id)).cast<String>();
+        (await diaVacacionesServices.getFechaByIdUsuario(widget.id))
+            .cast<String>();
     vacationDays = diasString.cast<DiaVacaciones>();
     setState(() {});
   }
@@ -52,7 +51,7 @@ class DateSelectorState extends State<DateSelector> {
     setState(() {});
   }
 
-   List<DateTime> obtenerDiasSeleccionados() {
+  List<DateTime> obtenerDiasSeleccionados() {
     List<DateTime> daysSelected = [];
     if (_rangeStart != null && _rangeEnd != null) {
       DateTime currentDay = _rangeStart!;
@@ -108,10 +107,11 @@ class DateSelectorState extends State<DateSelector> {
           eventLoader: (day) {
             final List<Event> events = [];
 
-            if (vacationDays.any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
+            if (vacationDays
+                .any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
               events.add(Event('Vacaciones'));
             }
-            
+
             /*if (festiveDays.any((dia) => isSameDay(DateTime.parse(dia.fecha), day))) {
               events.add(Event('Festivo'));
             }*/

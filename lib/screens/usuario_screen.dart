@@ -134,12 +134,15 @@ class _UsuarioScreenState extends State<UsuarioScreen> {
                             '${horaInicioSeleccionada.hour.toString().padLeft(2, '0')}:${horaInicioSeleccionada.minute.toString().padLeft(2, '0')}';
                         String horaFinFormatted =
                             '${horaFinSeleccionada.hour.toString().padLeft(2, '0')}:${horaFinSeleccionada.minute.toString().padLeft(2, '0')}';
-                        horarioPeluquerosServices.updateHorarioHoraEntradaYHoraSalida(
-                            widget.id, getSelectedDay(), horaInicioFormatted, horaFinFormatted );
+                        horarioPeluquerosServices
+                            .updateHorarioHoraEntradaYHoraSalida(
+                                widget.id,
+                                getSelectedDay(),
+                                horaInicioFormatted,
+                                horaFinFormatted);
                         List<DateTime> selectedDates = getSelectedDates();
                         selectedDates.forEach((date) {
                           String dateFormat = date.toString().substring(0, 10);
-                          print(dateFormat);
                           DiaVacaciones diaVacaciones = DiaVacaciones(
                               fecha: dateFormat, idUsuario: widget.id);
                           diaVacacionesServices
