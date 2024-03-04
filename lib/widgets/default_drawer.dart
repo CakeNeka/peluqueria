@@ -54,7 +54,7 @@ class DefaultDrawer extends StatelessWidget {
           ),
           if (rol == "gerente")
             ListTile(
-              title: const Text('Gestión de Horario'),
+              title: const Text('Horario Semanal'),
               selected: selectedIndex == 1,
               onTap: () {
                 Navigator.pushReplacementNamed(context, 'gestion_horario');
@@ -62,22 +62,30 @@ class DefaultDrawer extends StatelessWidget {
             ),
           if (rol == "gerente")
             ListTile(
-              title: const Text('Gestión de Peluqueros'),
+              title: const Text('Dias Festivos'),
               selected: selectedIndex == 2,
+              onTap: () {
+                Navigator.pushReplacementNamed(context, 'gestion_calendario');
+              },
+            ),
+          if (rol == "gerente")
+            ListTile(
+              title: const Text('Gestión de Peluqueros'),
+              selected: selectedIndex == 3,
               onTap: () {
                 Navigator.pushReplacementNamed(context, 'gestion_peluqueros');
               },
             ),
           ListTile(
             title: const Text('Reservas'),
-            selected: selectedIndex == 3,
+            selected: selectedIndex == 4,
             onTap: () {
               Navigator.pushReplacementNamed(context, 'reservas');
             },
           ),
           ListTile(
             title: const Text('Consulta Horarios Disponibles'),
-            selected: selectedIndex == 4,
+            selected: selectedIndex == 5,
             onTap: () {
               Navigator.pushReplacementNamed(context, 'consulta_horarios');
             },
