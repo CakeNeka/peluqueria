@@ -43,30 +43,51 @@ class _DiaFormState extends State<_DiaForm> {
     TimeOfDay endTimeEvening = TimeOfDay(
         hour: dia.endTimeEveningHour, minute: dia.endTimeEveningMinute);
 
+    Future<void> setHourAndMinute(int minute, int hour, int index) async {
+      if (minute % 15 == 0) {
+        setState(
+          () {
+            switch (index) {
+              case 1:
+                dia.startTimeMorningHour = hour;
+                dia.startTimeMorningMinute = minute;
+                break;
+              case 2:
+                dia.endTimeMorningHour = hour;
+                dia.endTimeMorningMinute = minute;
+                break;
+              case 3:
+                dia.startTimeEveningHour = hour;
+                dia.startTimeEveningMinute = minute;
+                break;
+              case 4:
+                dia.endTimeEveningHour = hour;
+                dia.endTimeEveningMinute = minute;
+                break;
+            }
+          },
+        );
+      }
+    }
+
     Future<void> selectTime(BuildContext context, int index) async {
       final TimeOfDay? picked =
           await showTimePicker(context: context, initialTime: TimeOfDay.now());
       if (picked != null) {
-        setState(() {
-          switch (index) {
-            case 1:
-              dia.startTimeMorningHour = picked.hour;
-              dia.startTimeMorningMinute = picked.minute;
-              break;
-            case 2:
-              dia.endTimeMorningHour = picked.hour;
-              dia.endTimeMorningMinute = picked.minute;
-              break;
-            case 3:
-              dia.startTimeEveningHour = picked.hour;
-              dia.startTimeEveningMinute = picked.minute;
-              break;
-            case 4:
-              dia.endTimeEveningHour = picked.hour;
-              dia.endTimeEveningMinute = picked.minute;
-              break;
+        if (index == 1 || index == 3) {
+          if (picked.hour < dia.endTimeEveningHour && index == 3 && picked.hour != 0) {
+            if (picked.minute <= dia.endTimeEveningMinute) {
+              setHourAndMinute(picked.minute, picked.hour, index);
+            }
           }
-        });
+          if (picked.hour < dia.endTimeMorningHour && index == 1 && picked.hour != 0) {
+            if (picked.minute <= dia.endTimeMorningMinute) {
+              setHourAndMinute(picked.minute, picked.hour, index);
+            }
+          }
+        } else {
+          setHourAndMinute(picked.minute, picked.hour, index);
+        }
       }
     }
 
