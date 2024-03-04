@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:peluqueria/models/diafestivo.dart';
 
-class DiaFestivoServices extends ChangeNotifier {
+/*class DiaFestivoServices extends ChangeNotifier {
   final String _baseUrl =
       "pelu-siemens-default-rtdb.europe-west1.firebasedatabase.app";
   final List<DiaFestivo> diafestivo = [];
@@ -32,4 +32,4 @@ Future<List<DiaFestivo>> loadDiaFestivo() async {
 
   return diafestivo;
 }
-}
+}*/
