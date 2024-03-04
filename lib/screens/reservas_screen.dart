@@ -48,7 +48,7 @@ class _ReservasScreenState extends State<ReservasScreen> {
         appBar: AppBar(
           title: Text("Consulta de Reservas"),
         ),
-        endDrawer: DefaultDrawer(selectedIndex: 3),
+        endDrawer: DefaultDrawer(selectedIndex: 4),
         body: ListView.separated(
           itemBuilder: (context, index) => Column(children: [
             Text(

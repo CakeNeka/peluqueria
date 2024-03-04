@@ -83,13 +83,6 @@ class DefaultDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'reservas');
             },
           ),
-          ListTile(
-            title: const Text('Consulta Horarios Disponibles'),
-            selected: selectedIndex == 5,
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'consulta_horarios');
-            },
-          ),
           Divider(
             thickness: 0.5,
             color: Colors.grey[400],
