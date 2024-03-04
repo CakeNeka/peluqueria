@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peluqueria/providers/connected_user_provider.dart';
+import 'package:peluqueria/screens/gestion_calendario_screen.dart';
 import 'package:peluqueria/screens/screens.dart';
 import 'package:peluqueria/services/services.dart';
 import 'package:peluqueria/theme/app_theme.dart';
@@ -23,11 +24,15 @@ class MyApp extends StatelessWidget {
         'register': (_) => RegisterScreen(),
         'home': (_) => HomeScreen(),
         'gestion_horario': (_) =>
-            GestionHorarioScreen(), // Calendario y Horario de Apertura
+            GestionHorarioSemanalScreen(), // Horario de Apertura
+        'gestion_calendario': (_) =>
+            GestionHorarioCalendarioScreen(), // Calendario - Dias festivos
         'gestion_peluqueros': (_) =>
             GestionPeluquerosScreen(usuariosServices: misUsuariosServices),
         'reservas': (_) => ReservasScreen(),
         'consulta_horarios': (_) => ConsultaHorariosScreen(),
+        'dia': (_) => DiaScreen(),
+        'dia_festivo': (_) => DiaFestivoScreen(),
       },
       theme: AppTheme.lightMode,
       darkTheme: AppTheme.lightMode, // TODO: Implementar tema oscuro
@@ -45,6 +50,8 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthService()),
         ChangeNotifierProvider(create: (_) => UsuariosServices()),
         ChangeNotifierProvider(create: (_) => ConnectedUserProvider()),
+        ChangeNotifierProvider(create: (_) => DiasServices()),
+        ChangeNotifierProvider(create: (_) => DiasFestivosServices()),
       ],
       child: MyApp(),
     );
